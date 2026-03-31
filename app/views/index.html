@@ -1,20 +1,545 @@
-{% extends "layouts/main.html" %}
+{% extends "layouts/hse.html" %}
 
-{% set pageName="Home" %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+
+{% block pageTitle %}
+  Prototype home
+{% endblock %}
 
 {% block content %}
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">GOV.UK Component Demo</h1>
+    <p class="govuk-body-l">This page demonstrates all major GOV.UK Frontend components for testing with the HSE Prototype Kit.</p>
 
-    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
 
-    <h1 class="govuk-heading-xl">
-      {{ serviceName }}
-    </h1>
+    <!-- TYPOGRAPHY -->
+    <h2 class="govuk-heading-l">Typography</h2>
+    <h1 class="govuk-heading-xl">Heading XL</h1>
+    <h2 class="govuk-heading-l">Heading L</h2>
+    <h3 class="govuk-heading-m">Heading M</h3>
+    <h4 class="govuk-heading-s">Heading S</h4>
+    <p class="govuk-body-l">Body L — lead paragraph text for introductions.</p>
+    <p class="govuk-body">Body — standard paragraph text used throughout.</p>
+    <p class="govuk-body-s">Body S — smaller text for captions or supporting content.</p>
+    <p class="govuk-body">
+      <a href="#" class="govuk-link">Standard link</a> —
+      <a href="#" class="govuk-link govuk-link--no-visited-state">No visited state</a> —
+      <a href="#" class="govuk-link govuk-link--muted">Muted link</a>
+    </p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Bulleted list item one</li>
+      <li>Bulleted list item two</li>
+      <li>Bulleted list item three</li>
+    </ul>
+    <ol class="govuk-list govuk-list--number">
+      <li>Numbered list item one</li>
+      <li>Numbered list item two</li>
+      <li>Numbered list item three</li>
+    </ol>
 
-    {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %}
-  </div>
-</div>
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
 
+    <!-- BUTTONS -->
+    <h2 class="govuk-heading-l">Buttons</h2>
+    <button class="govuk-button" data-module="govuk-button">Primary button</button>
+    <button class="govuk-button govuk-button--secondary" data-module="govuk-button">Secondary button</button>
+    <button class="govuk-button govuk-button--warning" data-module="govuk-button">Warning button</button>
+    <button class="govuk-button" disabled data-module="govuk-button">Disabled button</button>
+    <button class="govuk-button govuk-button--start" data-module="govuk-button">
+      Start now
+      <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"></path>
+      </svg>
+    </button>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- TEXT INPUT -->
+    <h2 class="govuk-heading-l">Text input</h2>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="input-default">Full name</label>
+      <div id="input-default-hint" class="govuk-hint">As shown on your passport or driving licence</div>
+      <input class="govuk-input" id="input-default" name="input-default" type="text" aria-describedby="input-default-hint">
+    </div>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="input-width-20">Width 20</label>
+      <input class="govuk-input govuk-input--width-20" id="input-width-20" name="input-width-20" type="text">
+    </div>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="input-width-10">Width 10</label>
+      <input class="govuk-input govuk-input--width-10" id="input-width-10" name="input-width-10" type="text">
+    </div>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="input-width-5">Width 5</label>
+      <input class="govuk-input govuk-input--width-5" id="input-width-5" name="input-width-5" type="text">
+    </div>
+    <div class="govuk-form-group govuk-form-group--error">
+      <label class="govuk-label" for="input-error">National Insurance number</label>
+      <div id="input-error-hint" class="govuk-hint">It's on your National Insurance card, benefit letter, payslip or P60. For example, 'QQ 12 34 56 C'.</div>
+      <p id="input-error-message" class="govuk-error-message">
+        <span class="govuk-visually-hidden">Error:</span> Enter a National Insurance number in the correct format
+      </p>
+      <input class="govuk-input govuk-input--error" id="input-error" name="input-error" type="text" aria-describedby="input-error-hint input-error-message">
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- TEXTAREA -->
+    <h2 class="govuk-heading-l">Textarea</h2>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="textarea-default">Can you provide more detail?</label>
+      <div id="textarea-default-hint" class="govuk-hint">Do not include personal or financial information like your National Insurance number or credit card details.</div>
+      <textarea class="govuk-textarea" id="textarea-default" name="textarea-default" rows="5" aria-describedby="textarea-default-hint"></textarea>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- RADIOS -->
+    <h2 class="govuk-heading-l">Radios</h2>
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          <h3 class="govuk-fieldset__heading">Where do you live?</h3>
+        </legend>
+        <div class="govuk-radios" data-module="govuk-radios">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="radio-1" name="radio-group" type="radio" value="england">
+            <label class="govuk-label govuk-radios__label" for="radio-1">England</label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="radio-2" name="radio-group" type="radio" value="scotland">
+            <label class="govuk-label govuk-radios__label" for="radio-2">Scotland</label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="radio-3" name="radio-group" type="radio" value="wales">
+            <label class="govuk-label govuk-radios__label" for="radio-3">Wales</label>
+          </div>
+          <div class="govuk-radios__divider">or</div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="radio-4" name="radio-group" type="radio" value="abroad">
+            <label class="govuk-label govuk-radios__label" for="radio-4">I live abroad</label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          <h3 class="govuk-fieldset__heading">Inline radios</h3>
+        </legend>
+        <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="radio-inline-1" name="radio-inline" type="radio" value="yes">
+            <label class="govuk-label govuk-radios__label" for="radio-inline-1">Yes</label>
+          </div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" id="radio-inline-2" name="radio-inline" type="radio" value="no">
+            <label class="govuk-label govuk-radios__label" for="radio-inline-2">No</label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- CHECKBOXES -->
+    <h2 class="govuk-heading-l">Checkboxes</h2>
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          <h3 class="govuk-fieldset__heading">Which types of waste do you transport?</h3>
+        </legend>
+        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="checkbox-1" name="checkbox-group" type="checkbox" value="animal">
+            <label class="govuk-label govuk-checkboxes__label" for="checkbox-1">Waste from animal carcasses</label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="checkbox-2" name="checkbox-group" type="checkbox" value="mines">
+            <label class="govuk-label govuk-checkboxes__label" for="checkbox-2">Waste from mines or quarries</label>
+          </div>
+          <div class="govuk-checkboxes__item">
+            <input class="govuk-checkboxes__input" id="checkbox-3" name="checkbox-group" type="checkbox" value="farm">
+            <label class="govuk-label govuk-checkboxes__label" for="checkbox-3">Farm or agricultural waste</label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- SELECT -->
+    <h2 class="govuk-heading-l">Select</h2>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="select-default">Sort by</label>
+      <select class="govuk-select" id="select-default" name="select-default">
+        <option value="published">Recently published</option>
+        <option value="updated" selected>Recently updated</option>
+        <option value="views">Most views</option>
+        <option value="comments">Most comments</option>
+      </select>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- DATE INPUT -->
+    <h2 class="govuk-heading-l">Date input</h2>
+    <div class="govuk-form-group">
+      <fieldset class="govuk-fieldset" role="group" aria-describedby="date-hint">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+          <h3 class="govuk-fieldset__heading">What is your date of birth?</h3>
+        </legend>
+        <div id="date-hint" class="govuk-hint">For example, 27 3 1984</div>
+        <div class="govuk-date-input">
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="date-day">Day</label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date-day" name="date-day" type="text" inputmode="numeric">
+            </div>
+          </div>
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="date-month">Month</label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date-month" name="date-month" type="text" inputmode="numeric">
+            </div>
+          </div>
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label class="govuk-label govuk-date-input__label" for="date-year">Year</label>
+              <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="date-year" name="date-year" type="text" inputmode="numeric">
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- FILE UPLOAD -->
+    <h2 class="govuk-heading-l">File upload</h2>
+    <div class="govuk-form-group">
+      <label class="govuk-label" for="file-upload">Upload a file</label>
+      <div id="file-upload-hint" class="govuk-hint">Your file must be a PDF, CSV or image</div>
+      <input class="govuk-file-upload" id="file-upload" name="file-upload" type="file" aria-describedby="file-upload-hint">
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- INSET TEXT -->
+    <h2 class="govuk-heading-l">Inset text</h2>
+    <div class="govuk-inset-text">
+      It can take up to 8 weeks to register a lasting power of attorney if there are no mistakes in the application.
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- WARNING TEXT -->
+    <h2 class="govuk-heading-l">Warning text</h2>
+    <div class="govuk-warning-text">
+      <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+      <strong class="govuk-warning-text__text">
+        <span class="govuk-visually-hidden">Warning</span>
+        You can be fined up to £5,000 if you do not register.
+      </strong>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- NOTIFICATION BANNER -->
+    <h2 class="govuk-heading-l">Notification banner</h2>
+    <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+      <div class="govuk-notification-banner__header">
+        <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">Important</h2>
+      </div>
+      <div class="govuk-notification-banner__content">
+        <p class="govuk-body">You have 7 days left to send your application. <a class="govuk-notification-banner__link" href="#">View application</a>.</p>
+      </div>
+    </div>
+    <div class="govuk-notification-banner govuk-notification-banner--success" role="alert" aria-labelledby="govuk-notification-banner-title-success" data-module="govuk-notification-banner">
+      <div class="govuk-notification-banner__header">
+        <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title-success">Success</h2>
+      </div>
+      <div class="govuk-notification-banner__content">
+        <p class="govuk-body">Your details have been saved.</p>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- ERROR SUMMARY -->
+    <h2 class="govuk-heading-l">Error summary</h2>
+    <div class="govuk-error-summary" data-module="govuk-error-summary">
+      <div role="alert">
+        <h2 class="govuk-error-summary__title">There is a problem</h2>
+        <div class="govuk-error-summary__body">
+          <ul class="govuk-list govuk-error-summary__list">
+            <li><a href="#input-error">Enter a National Insurance number in the correct format</a></li>
+            <li><a href="#date-day">Enter your date of birth</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- DETAILS -->
+    <h2 class="govuk-heading-l">Details</h2>
+    <details class="govuk-details">
+      <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">Help with National Insurance number</span>
+      </summary>
+      <div class="govuk-details__text">
+        Your National Insurance number is on your National Insurance card, benefit letter, payslip or P60. For example, 'QQ 12 34 56 C'.
+      </div>
+    </details>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- SUMMARY LIST -->
+    <h2 class="govuk-heading-l">Summary list</h2>
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Name</dt>
+        <dd class="govuk-summary-list__value">Sarah Philips</dd>
+        <dd class="govuk-summary-list__actions"><a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> name</span></a></dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Date of birth</dt>
+        <dd class="govuk-summary-list__value">5 January 1978</dd>
+        <dd class="govuk-summary-list__actions"><a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> date of birth</span></a></dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">Address</dt>
+        <dd class="govuk-summary-list__value">72 Guild Street<br>London<br>SE23 6FH</dd>
+        <dd class="govuk-summary-list__actions"><a class="govuk-link" href="#">Change<span class="govuk-visually-hidden"> address</span></a></dd>
+      </div>
+    </dl>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- TABLE -->
+    <h2 class="govuk-heading-l">Table</h2>
+    <table class="govuk-table">
+      <caption class="govuk-table__caption govuk-table__caption--m">Dates and amounts</caption>
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header">Date</th>
+          <th scope="col" class="govuk-table__header">Description</th>
+          <th scope="col" class="govuk-table__header govuk-table__header--numeric">Amount</th>
+        </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">1 August 2023</td>
+          <td class="govuk-table__cell">Payment received</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">£150.00</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">5 September 2023</td>
+          <td class="govuk-table__cell">Refund issued</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">£-25.00</td>
+        </tr>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">12 October 2023</td>
+          <td class="govuk-table__cell">Payment received</td>
+          <td class="govuk-table__cell govuk-table__cell--numeric">£200.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- TABS -->
+    <h2 class="govuk-heading-l">Tabs</h2>
+    <div class="govuk-tabs" data-module="govuk-tabs">
+      <h3 class="govuk-tabs__title">Contents</h3>
+      <ul class="govuk-tabs__list">
+        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+          <a class="govuk-tabs__tab" href="#tab-past-day">Past day</a>
+        </li>
+        <li class="govuk-tabs__list-item">
+          <a class="govuk-tabs__tab" href="#tab-past-week">Past week</a>
+        </li>
+        <li class="govuk-tabs__list-item">
+          <a class="govuk-tabs__tab" href="#tab-past-month">Past month</a>
+        </li>
+      </ul>
+      <div class="govuk-tabs__panel" id="tab-past-day">
+        <h3 class="govuk-heading-m">Past day</h3>
+        <p class="govuk-body">Content for the past day tab.</p>
+      </div>
+      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="tab-past-week">
+        <h3 class="govuk-heading-m">Past week</h3>
+        <p class="govuk-body">Content for the past week tab.</p>
+      </div>
+      <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="tab-past-month">
+        <h3 class="govuk-heading-m">Past month</h3>
+        <p class="govuk-body">Content for the past month tab.</p>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- ACCORDION -->
+    <h2 class="govuk-heading-l">Accordion</h2>
+    <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+      <div class="govuk-accordion__section">
+        <div class="govuk-accordion__section-header">
+          <h2 class="govuk-accordion__section-heading">
+            <span class="govuk-accordion__section-button" id="accordion-default-heading-1">Writing well for the web</span>
+          </h2>
+        </div>
+        <div id="accordion-default-content-1" class="govuk-accordion__section-content">
+          <p class="govuk-body">This is the content for writing well for the web.</p>
+        </div>
+      </div>
+      <div class="govuk-accordion__section">
+        <div class="govuk-accordion__section-header">
+          <h2 class="govuk-accordion__section-heading">
+            <span class="govuk-accordion__section-button" id="accordion-default-heading-2">Writing well for specialists</span>
+          </h2>
+        </div>
+        <div id="accordion-default-content-2" class="govuk-accordion__section-content">
+          <p class="govuk-body">This is the content for writing well for specialists.</p>
+        </div>
+      </div>
+      <div class="govuk-accordion__section">
+        <div class="govuk-accordion__section-header">
+          <h2 class="govuk-accordion__section-heading">
+            <span class="govuk-accordion__section-button" id="accordion-default-heading-3">Know your audience</span>
+          </h2>
+        </div>
+        <div id="accordion-default-content-3" class="govuk-accordion__section-content">
+          <p class="govuk-body">This is the content about knowing your audience.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- BREADCRUMBS -->
+    <h2 class="govuk-heading-l">Breadcrumbs</h2>
+    <div class="govuk-breadcrumbs">
+      <ol class="govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item"><a class="govuk-breadcrumbs__link" href="#">Home</a></li>
+        <li class="govuk-breadcrumbs__list-item"><a class="govuk-breadcrumbs__link" href="#">Section</a></li>
+        <li class="govuk-breadcrumbs__list-item">Current page</li>
+      </ol>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- PAGINATION -->
+    <h2 class="govuk-heading-l">Pagination</h2>
+    <nav class="govuk-pagination" aria-label="Pagination">
+      <div class="govuk-pagination__prev">
+        <a class="govuk-link govuk-pagination__link" href="#" rel="prev">
+          <svg class="govuk-pagination__icon govuk-pagination__icon--prev" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+            <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
+          </svg>
+          <span class="govuk-pagination__link-title">Previous<span class="govuk-visually-hidden"> page</span></span>
+        </a>
+      </div>
+      <ul class="govuk-pagination__list">
+        <li class="govuk-pagination__item"><a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 1">1</a></li>
+        <li class="govuk-pagination__item govuk-pagination__item--current"><a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 2" aria-current="page">2</a></li>
+        <li class="govuk-pagination__item"><a class="govuk-link govuk-pagination__link" href="#" aria-label="Page 3">3</a></li>
+      </ul>
+      <div class="govuk-pagination__next">
+        <a class="govuk-link govuk-pagination__link" href="#" rel="next">
+          <span class="govuk-pagination__link-title">Next<span class="govuk-visually-hidden"> page</span></span>
+          <svg class="govuk-pagination__icon govuk-pagination__icon--next" xmlns="http://www.w3.org/2000/svg" height="13" width="15" aria-hidden="true" focusable="false" viewBox="0 0 15 13">
+            <path d="m8.107-0.0078125-1.4136 1.414 4.2926 4.293h-12.986v2h12.896l-4.1855 3.9766 1.377 1.4492 6.7441-6.4062-6.7246-6.7246z"></path>
+          </svg>
+        </a>
+      </div>
+    </nav>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- PHASE BANNER -->
+    <h2 class="govuk-heading-l">Phase banner</h2>
+    <div class="govuk-phase-banner">
+      <p class="govuk-phase-banner__content">
+        <strong class="govuk-tag govuk-phase-banner__content__tag">Alpha</strong>
+        <span class="govuk-phase-banner__text">This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.</span>
+      </p>
+    </div>
+    <div class="govuk-phase-banner">
+      <p class="govuk-phase-banner__content">
+        <strong class="govuk-tag govuk-tag--blue govuk-phase-banner__content__tag">Beta</strong>
+        <span class="govuk-phase-banner__text">This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.</span>
+      </p>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- TAGS -->
+    <h2 class="govuk-heading-l">Tags</h2>
+    <p>
+      <strong class="govuk-tag">Alpha</strong>
+      <strong class="govuk-tag govuk-tag--grey">Inactive</strong>
+      <strong class="govuk-tag govuk-tag--green">Completed</strong>
+      <strong class="govuk-tag govuk-tag--turquoise">Active</strong>
+      <strong class="govuk-tag govuk-tag--blue">New</strong>
+      <strong class="govuk-tag govuk-tag--purple">Received</strong>
+      <strong class="govuk-tag govuk-tag--pink">Sent</strong>
+      <strong class="govuk-tag govuk-tag--red">Rejected</strong>
+      <strong class="govuk-tag govuk-tag--orange">Declined</strong>
+      <strong class="govuk-tag govuk-tag--yellow">Pending</strong>
+    </p>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- PANEL -->
+    <h2 class="govuk-heading-l">Panel</h2>
+    <div class="govuk-panel govuk-panel--confirmation">
+      <h2 class="govuk-panel__title">Application complete</h2>
+      <div class="govuk-panel__body">
+        Your reference number<br><strong>HDJ2123F</strong>
+      </div>
+    </div>
+
+    <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+
+    <!-- FIELDSET / ADDRESS -->
+    <h2 class="govuk-heading-l">Fieldset (address example)</h2>
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h3 class="govuk-fieldset__heading">What is your address?</h3>
+      </legend>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="address-line-1">Address line 1</label>
+        <input class="govuk-input" id="address-line-1" name="address-line-1" type="text" autocomplete="address-line1">
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="address-line-2">Address line 2 (optional)</label>
+        <input class="govuk-input" id="address-line-2" name="address-line-2" type="text" autocomplete="address-line2">
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="address-town">Town or city</label>
+        <input class="govuk-input govuk-input--width-20" id="address-town" name="address-town" type="text" autocomplete="address-level2">
+      </div>
+      <div class="govuk-form-group">
+        <label class="govuk-label" for="address-postcode">Postcode</label>
+        <input class="govuk-input govuk-input--width-10" id="address-postcode" name="address-postcode" type="text" autocomplete="postal-code">
+      </div>
+    </fieldset>
+
+
+
+
+
+
+      
 {% endblock %}

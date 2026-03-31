@@ -1,0 +1,25 @@
+{% extends "layouts/main.html" %}
+
+{% block stylesheets %}
+  {{ super() }}
+  <link href="/public/v6-css/6.6.0.min.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="/public/v6-js/main-6.6.0.min.js"></script>
+{% endblock %}
+
+{% block header %}
+  {% include "includes/hse-header.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/hse-breadcrumbs.html" %}
+{% endblock %}
+
+{% block mainClasses %}govuk-main-wrapper hse-main{% endblock %}
+
+{% block footer %}
+  {% include "includes/hse-footer.html" %}
+{% endblock %}
