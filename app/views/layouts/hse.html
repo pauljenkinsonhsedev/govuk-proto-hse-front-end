@@ -3,6 +3,7 @@
 {% block stylesheets %}
   {{ super() }}
   <link href="/public/v6-css/6.6.0.min.css" rel="stylesheet" type="text/css" />
+  <link href="/public/v6-css/prototype-overrides.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block scripts %}
@@ -12,10 +13,11 @@
 
 {% block header %}
   {% include "includes/hse-header.html" %}
+  {% include "includes/hse-service-navigation.html" %}
 {% endblock %}
 
 {% block beforeContent %}
-  {% include "includes/hse-breadcrumbs.html" %}
+  {% include "includes/hse-back-link.html" %}
 {% endblock %}
 
 {% block mainClasses %}govuk-main-wrapper hse-main{% endblock %}
