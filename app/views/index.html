@@ -13,9 +13,28 @@
 
 {% block pageTitle %}
   Prototype home
-  {% endblock %}
-  
-  {% block content %}
-  
-        
-        {% endblock %}}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="govuk-heading-l">Autocomplete test</h1>
+
+<div class="govuk-form-group">
+{{ govukSelect({
+  id: "country",
+  name: "country",
+  label: {
+    text: "Choose a country"
+  },
+  items: [
+    { value: "", text: "" },
+    { value: "france", text: "France" },
+    { value: "germany", text: "Germany" },
+    { value: "spain", text: "Spain" },
+    { value: "italy", text: "Italy" },
+    { value: "uk", text: "United Kingdom", selected: true }
+  ]
+}) }}
+</div>
+
+{% endblock %}
