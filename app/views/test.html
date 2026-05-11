@@ -1,0 +1,35 @@
+{% extends "layouts/hse.html" %}
+
+{% block pageTitle %}
+  How many dwelling units are there that lie partly or wholly within a consultation distance? – {{ serviceName }} – HSE
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/next" method="post" novalidate>
+
+        <div class="hse-form-group">
+          <h1 class="govuk-label-wrapper">
+            <label class="hse-label hse-label--l hse-u-margin-bottom-3" for="dwelling-units">
+              How many dwelling units are there that lie partly or wholly within a consultation distance?
+            </label>
+          </h1>
+          <div class="hse-hint" id="dwelling-units-hint">
+            A dwelling unit means the smallest individual unit of accommodation, for example a house or flat
+          </div>
+          <input class="hse-input hse-input--width-3" id="dwelling-units" name="dwellingUnits" type="text" spellcheck="false" aria-describedby="dwelling-units-hint">
+        </div>
+
+        <button class="hse-button">
+          Continue
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

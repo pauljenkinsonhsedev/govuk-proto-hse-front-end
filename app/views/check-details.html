@@ -1,0 +1,61 @@
+{% extends "layouts/hse.html" %}
+
+{% block pageTitle %}
+  Check development details – {{ serviceName }} – HSE
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="hse-heading-l">Check development details</h1>
+
+      {% if data.developments and data.developments | length %}
+        <div class="hse-table-container">
+          <table class="hse-table">
+            <!-- <caption class="hse-table__caption">
+            2 column table
+            </caption> -->
+            <thead class="hse-table__head">
+              <tr>
+                <th scope="col">Proposed</th>
+                <th scope="col">Development type</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody class="hse-table__body">
+              {% for dev in data.developments %}
+                <tr class="hse-table__row">
+                  <td class="hse-table__cell">{{ dev.buildingType }}</td>
+                  <td class="hse-table__cell">{{ dev.developmentType }}</td>
+                  <td class="hse-table__cell hse-table__cell--numeric"><a href="/remove-development/{{ loop.index0 }}" class="hse-link hse-link--no-visited-state" style="color:#981e32;">Remove<span class="govuk-visually-hidden"> {{ dev.buildingType }}</span></a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p class="hse-body">
+          You have not added any developments.
+        </p>
+      {% endif %}
+
+      <p class="hse-body">
+        To help determine planning advice you must accurately identify and map all proposed developments located within the site boundary.
+      </p>
+
+      <form action="/check-development-details" method="post" novalidate>
+        <div class="govuk-button-group">
+          <button type="submit" class="hse-button hse-u-margin-right-3" name="add-more-devs" value="false">
+            Continue
+          </button>
+          <button type="submit" class="hse-button hse-button--secondary" name="add-more-devs" value="true">
+            Add another development
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+    
+{% endblock %}

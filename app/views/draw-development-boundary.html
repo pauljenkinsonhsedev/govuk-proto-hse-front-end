@@ -1,0 +1,147 @@
+{% extends "layouts/hse.html" %}
+
+{% block pageTitle %}
+  Draw development boundary – {{ serviceName }} – HSE
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/hse-back-link.html" %}
+{% endblock %}
+
+{% block content %}
+
+<style>
+  .hmlr-map-wrapper {
+    height: 600px !important;
+    width: 100% !important;
+  }
+  #container {
+    display: flex;
+    align-items: flex-start;
+  }
+</style>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <h1 class="hse-heading-l">
+      Draw where {{ dev.buildingType | lower }} is situated
+    </h1>
+  </div>
+</div>
+
+<div id="container" class="govuk-grid-row">
+
+  <div class="govuk-grid-column-one-quarter">
+    {% include "/includes/controls.html" %}
+  </div>
+
+  <div class="govuk-grid-column-three-quarters" style="min-height: 600px;">
+    {{ hmlrMap({
+      width: "100%",
+      height: "100%",
+      layer_controls: "false",
+      coords: "249050,59150",
+      zoom: 18,
+      layers:[
+        {
+          description:"Registrations (INSPIRE)",
+          interactive: "true",
+          style: {
+            fill: {
+              color: "#4c2c9244"
+            },
+            stroke: {
+              color: "#4c2c9299",
+              width: 1
+            }
+          }
+        },
+        {
+          description:"Postcode",
+          style: {
+            fill: {
+              color: "#d4351c33"
+            },
+            stroke: {
+              color: "#d4351c",
+              width: 3,
+              lineDash: [10, 6]
+            }
+          }
+        }
+      ],
+      tile_url: 'https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
+    }) }}
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block pageScripts %}
+<script>
+  var retrievedMap;
+  
+  function setElementHeight(selector) {
+    const el = document.querySelector(selector);
+    if (!el) return;
+
+    function updateHeight() {
+      el.style.height = window.innerHeight - 170 + 'px';
+    }
+
+    window.addEventListener('load', updateHeight);
+    window.addEventListener('resize', updateHeight);
+  }
+
+  setElementHeight('.hmlr-map-wrapper');
+  setElementHeight('.navbar');
+
+  function exportGeometries() {
+    console.log('export');
+    const data = getGeometries();
+    console.log(data);
+
+    const now = new Date();
+    const timestamp = now.toISOString().replace(/:/g, '-').replace(/\..+/, '').replace('T', '_');
+    const filename = timestamp + '.json';
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function initializeDrawTools(map) {
+    document
+      .querySelectorAll(`input[type="radio"].${CONFIG.SELECTORS.RADIO_CLASS}`)
+      .forEach((radio) => {
+        radio.addEventListener('change', (e) => setDrawMode(map, e.target.value));
+      });
+
+    setDrawMode(map, 'draw-area')
+
+    const clearBtn = document.getElementById('clearAllBtn');
+    if (clearBtn) clearBtn.addEventListener('click', clearAllDrawings);
+
+    const undoBtn = document.getElementById('undoBtn');
+    if (undoBtn) undoBtn.addEventListener('click', undo);
+
+    const exportBtn = document.getElementById('exportBtn');
+    if (exportBtn) exportBtn.addEventListener('click', exportGeometries);  
+  }
+
+  document.addEventListener("DOMContentLoaded", (event) => {
+    retrievedMap = document.getElementById('map1')._olMap;
+    initializeDrawTools(retrievedMap);
+  })
+
+  function setCenter(coords) {
+    retrievedMap.getView().setCenter(coords);
+  }
+</script>
+{% endblock %}

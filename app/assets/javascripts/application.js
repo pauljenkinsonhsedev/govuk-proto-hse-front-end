@@ -9,7 +9,8 @@ window.GOVUKPrototypeKit.documentReady(() => {
           showAllValues: true,
           minLength: 0,
           displayMenu: 'overlay',
-          defaultValue: ''
+          defaultValue: '',
+          autocomplete: false
         })
       } catch (err) {
         console.error('Autocomplete failed for', select.id, err)

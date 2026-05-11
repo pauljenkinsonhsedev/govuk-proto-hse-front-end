@@ -1,0 +1,41 @@
+{% extends "layouts/hse.html" %}
+
+{% block pageTitle %}
+  Are you sure you want to remove the proposed development? – {{ serviceName }} – HSE
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form action="/remove-development-answer" method="post" novalidate>
+
+        <div class="hse-form-group">
+          <fieldset class="hse-fieldset">
+            <legend class="hse-fieldset__legend hse-fieldset__legend--l">
+              <h1 class="hse-fieldset__heading">Are you sure you want to remove {{ dev.buildingType | lower }}?</h1>
+            </legend>
+            <div class="hse-radios hse-radios--inline">
+              <div class="hse-radios__item">
+                <input class="hse-radios__input" id="remove-development-yes" name="remove-development" type="radio" value="yes">
+                <label class="hse-label hse-radios__label" for="remove-development-yes">Yes</label>
+              </div>
+              <div class="hse-radios__item">
+                <input class="hse-radios__input" id="remove-development-no" name="remove-development" type="radio" value="no">
+                <label class="hse-label hse-radios__label" for="remove-development-no">No</label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <button type="submit" class="hse-button">
+          Continue
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,5 +1,10 @@
 {% extends "layouts/main.html" %}
 
+{% block headIcons %}
+  <link rel="icon" href="/public/images/hse-favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/public/images/hse-favicon.ico" type="image/x-icon">
+{% endblock %}
+
 {% block stylesheets %}
   {{ super() }}
   <link href="/public/v6-css/6.6.0.min.css" rel="stylesheet" type="text/css" />
@@ -18,7 +23,6 @@
 
 {% block head %}
   {{ super() }}
-  <link href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700,400italic&display=swap" rel="stylesheet">
   <link rel="shortcut icon" href="/public/images/favicon.ico">
 {% endblock %}
 

@@ -1,0 +1,27 @@
+{% extends "layouts/hse.html" %}
+
+{% block pageTitle %}
+  How many dwelling units are there that lie partly or wholly within a consultation distance? – {{ serviceName }} – HSE
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="hse-heading-l">
+        Dwelling density
+      </h1>
+
+      <p class="hse-body">
+        <strong>{{ (data['dwellingUnits'] / 34008.226) | round(5) | toFixed(5) }}</strong> dwelling units per metre<sup>2</sup>
+      </p>
+
+      <p class="hse-body">
+        <strong>{{ ((data['dwellingUnits'] / 34008.226) * 10000) | round(5) | toFixed(5) }}</strong> dwelling units per hectare
+      </p>
+
+    </div>
+  </div>
+
+{% endblock %}
