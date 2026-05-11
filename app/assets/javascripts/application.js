@@ -3,11 +3,17 @@ window.GOVUKPrototypeKit.documentReady(() => {
   
   selects.forEach((select) => {
     if (window.accessibleAutocomplete) {
-      window.accessibleAutocomplete.enhanceSelectElement({
-        selectElement: select,
-        showAllValues: true,
-        displayMenu: 'overlay'
-      })
+      try {
+        window.accessibleAutocomplete.enhanceSelectElement({
+          selectElement: select,
+          showAllValues: true,
+          minLength: 0,
+          displayMenu: 'overlay',
+          defaultValue: ''
+        })
+      } catch (err) {
+        console.error('Autocomplete failed for', select.id, err)
+      }
     }
   })
 })
