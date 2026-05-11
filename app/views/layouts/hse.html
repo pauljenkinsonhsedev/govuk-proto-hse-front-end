@@ -14,19 +14,6 @@
   <!-- Autocomplete library -->
   <script src="/public/javascripts/accessible-autocomplete.min.js"></script>
 
-  <!-- Initialise autocomplete -->
-  <script>
-    window.GOVUKPrototypeKit.documentReady(() => {
-      const select = document.querySelector('#country')
-
-      if (select && window.accessibleAutocomplete) {
-        window.accessibleAutocomplete.enhanceSelectElement({
-          selectElement: select,
-          showAllValues: true
-        })
-      }
-    })
-  </script>
 {% endblock %}
 
 {% block head %}
