@@ -20,21 +20,14 @@
 <h1 class="govuk-heading-l">Autocomplete test</h1>
 
 <div class="govuk-form-group">
-{{ govukSelect({
-  id: "country",
-  name: "country",
-  label: {
-    text: "Choose a country"
-  },
-  items: [
-    { value: "", text: "" },
-    { value: "france", text: "France" },
-    { value: "germany", text: "Germany" },
-    { value: "spain", text: "Spain" },
-    { value: "italy", text: "Italy" },
-    { value: "uk", text: "United Kingdom", selected: true }
-  ]
-}) }}
-</div>
+          <h1 class="govuk-label-wrapper">
+            <label class="hse-label hse-label--l hse-u-margin-bottom-3" for="building-type">
+              What is being developed on the site?
+            </label>
+          </h1>
+          <select class="govuk-select" id="building-type" name="buildingType" data-module="autocomplete" data-show-all-values="true" data-show-no-options-found="true">
+            {% include "includes/lists/building-type.html" %}
+          </select>
+        </div>
 
 {% endblock %}
