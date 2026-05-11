@@ -24,12 +24,12 @@ router.post('/check-details', (req, res) => {
   const developmentType =
     developmentTypes.length === 1 ? developmentTypes[0] : null
 
-  // Ensure array exists
+  // ✅ Ensure array exists
   if (!req.session.data.developments) {
     req.session.data.developments = []
   }
 
-  // SAVE ONE development (THIS IS THE FIX)
+  // ✅ SAVE ONE development (THIS IS THE FIX)
   req.session.data.developments.push({
     buildingType,
     developmentType
@@ -39,7 +39,7 @@ router.post('/check-details', (req, res) => {
   delete req.session.data.buildingType
   delete req.session.data.developmentType
 
-  // Save session before redirecting to ensure data is written on Azure
+  // ✅ Save session before redirecting to ensure data is written on Azure
   req.session.save(() => {
     res.redirect('/check-details')
   })
@@ -64,7 +64,11 @@ router.get('/remove-development/:index', (req, res) => {
   }
   // store index so POST knows what to remove
   req.session.data.removeIndex = index
-  res.render('remove-development', { dev })
+
+  // ✅ Save session before rendering to ensure index is written on Azure
+  req.session.save(() => {
+    res.render('remove-development', { dev })
+  })
 })
 
 router.post('/remove-development-answer', (req, res) => {
@@ -78,7 +82,7 @@ router.post('/remove-development-answer', (req, res) => {
   // clean up
   delete req.session.data.removeIndex
 
-  // Save session before redirecting to ensure data is written on Azure
+  // ✅ Save session before redirecting to ensure data is written on Azure
   req.session.save(() => {
     res.redirect('/check-details')
   })
