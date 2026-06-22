@@ -1,0 +1,64 @@
+{% extends "layouts/hse.html" %}
+
+{% block pageTitle %}
+  {{ serviceName }} – HSE
+{% endblock %}
+
+{% block header %}
+  {% include "includes/hse-header.html" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/hse-breadcrumbs.html" %}
+{% endblock %}
+
+{% block content %}
+
+  <div class="hse-grid-row">
+    <div class="hse-grid-column-two-thirds">
+
+      <h1 class="hse-heading-xl">
+        Get planning advice
+      </h1>
+
+    </div>
+  </div>
+
+  <div class="hse-grid-row">
+    <div class="hse-grid-column-two-thirds">
+
+      <p class="hse-body">
+        Use this service to get pre-application and statutory advice from HSE on a proposed development around major hazard sites and pipelines.
+      </p>
+
+      <p>This service cannot be used for:</p>
+      <ul class="hse-list hse--bullet">
+        <li>hazardous substances consent</li>
+        <li>planning applications regarding fire safety matters</li>
+        <li>developments around nuclear sites, explosive sites or quarries</li>
+      </ul>
+
+      <a href="sign-in" role="button" draggable="false" class="hse-button hse-button--start">
+        Start now
+      </a>
+
+    </div>
+
+    <!-- <div class="hse-grid-column-one-third">
+
+      <div class="hse-related-navigation">
+        <h2>Related content</h2>
+        <nav class="hse-related-navigation__nav-section">
+        <ul>
+          <li><a href="#">Related link item</a></li>
+        </ul>
+        </nav>
+      </div>
+    </div> -->
+  </div>
+
+{% endblock %}
+
+{% block footer %}
+  {% include "includes/hse-footer-web.html" %}
+{% endblock %}
